@@ -73,7 +73,7 @@ discount = "10%";
 
 console.log(discount);
 
-// arrays in typescript
+// 4. arrays in typescript
 
 let prices: number[] = [10, 20, 30];
 
@@ -98,4 +98,40 @@ let colors: string[] = ["red", "yellow", "green"];
 //colors.push(180); // this will result in typeError
 
 let user: (string | number)[] = ["John", "peter", 100, 90];
-// usrt.push(true); // this array will take only string and number data type values not boolean which will result in typeError
+// user.push(true); // this array will take only string and number data type values not boolean which will result in typeError
+
+// 5. objects in typescript
+
+let car: { brand: string; year: number } = { brand: "hyundai", year: 2020 };
+
+// car.color = "red" // Property 'color' does not exist on type '{ brand: string; year: number; }'.
+
+let book = { title: "typescript", cost: 20 };
+let pen = { title: "bluepen", cost: 10 };
+let notebook = { title: "classmate" };
+
+// let items: { title: string; cost: number }[] = [book, pen, notebook];
+// when we try to add notebook it will throw an error: Property 'cost' is missing in type '{ title: string; }' but required in type '{ title: string; cost: number; }'.
+
+// NOTE : to fix this issue we can add "?" before the cost where typescript treats cost property has an optional value.
+// let items: { title: string; cost?: number }[] = [book, pen, notebook];
+
+// 5 - readonly in typescript - In TypeScript, readonly is used to make a property immutable after it’s initialized. Once a value is set, you can’t change it later.
+
+let items2: { readonly title: string; cost?: number }[] = [book, pen, notebook];
+
+// items2[0].title = "javascript"; // Cannot assign to 'title' because it is a read-only property.
+
+// challenge topic
+
+let bike: { brand: string; year: number } = { brand: "KTM", year: 2023 };
+// bike.year = "2023" // Type 'string' is not assignable to type 'number'.
+
+let laptop: { brand: string; year: number } = { brand: "asus", year: 2022 };
+
+let user2: { name: string; age: number }[] = [
+  { name: "john", age: 20 },
+  { name: "peter", age: 28 },
+];
+
+// 6 - Functions in typescript
