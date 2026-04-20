@@ -135,3 +135,70 @@ let user2: { name: string; age: number }[] = [
 ];
 
 // 6 - Functions in typescript
+
+// Parameters
+// Function parameters are typed with a similar syntax as variable declarations.
+// NOTE: If no parameter type is defined, TypeScript will default to using any.
+
+function sayHello(name: string) {
+  console.log(`Hello ${name} !!!`);
+}
+
+sayHello("nanda");
+
+// Return Type - The type of the value returned by the function can be explicitly defined.
+
+function calculateDiscount(price: number): number {
+  return price * 0.9;
+}
+
+const finalprice = calculateDiscount(200);
+
+// Challenge in functions
+
+const names: string[] = ["john", "peter", "nanda"];
+
+function checkName(name: string, arr: string[]): boolean | undefined {
+  for (let i = 0; i < arr.length; i++) {
+    if (name.toLowerCase() === arr[i].toLowerCase()) {
+      return true;
+    }
+  }
+  return false;
+}
+
+console.log(checkName("kevin", names));
+
+// optional and default parameters
+
+function calculatePrice(price: number, discount?: number): number {
+  return price - (discount || 0); // to handle undefined in discount we can make it 0 since there is no discount value
+}
+
+let priceAfterDiscount = calculatePrice(100, 20);
+
+function calculateScore(points: number, penalty: number = 0): string {
+  let finalScore = points - penalty;
+  return `The final score is ${finalScore}`;
+}
+
+let score: string = calculateScore(100);
+
+console.log(score);
+
+// Function rest parameter
+
+function sumOfN(...args: number[]): number {
+  let total = args.reduce((acc, num) => acc + num, 0);
+  return total;
+}
+
+console.log(sumOfN(1, 2, 3, 4, 5));
+
+// void - we can use void when function does not have to return any value.
+
+function logMessage(message: string): void {
+  console.log(message);
+}
+
+logMessage("Hello, TypeScript!");
