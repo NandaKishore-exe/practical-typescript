@@ -216,3 +216,39 @@ const first = createEmployee({ id: 1 });
 const second = createEmployee({ id: 2 });
 
 console.log(first, second);
+
+// alternative approach - we can store a object in variable and pass with type as parameters
+
+function createStudent(student: { id: number; name: string }) {
+  console.log(`Welcome to the course ${student.name.toUpperCase()}!!!`);
+}
+
+const newStudent = {
+  id: 5,
+  name: "anna",
+  email: "anna@gmail.com",
+};
+
+// createStudent(newStudent);
+// createStudent({ id: 1, name: "bob", email: "bob@gmail.com" });
+
+// TypeScript only performs excess property checks on object literals where they're used, not on references to them.
+
+// challenge
+
+function processData(
+  input: string | number,
+  config: { reverse: boolean } = { reverse: false },
+): string | number {
+  if (typeof input === "number") {
+    return input * input;
+  } else {
+    return config.reverse
+      ? input.toUpperCase().split("").reverse().join("")
+      : input.toUpperCase();
+  }
+}
+
+console.log(processData(10)); // Output: 100
+console.log(processData("Hello")); // Output: HELLO
+console.log(processData("Hello", { reverse: true })); // Output: OLLEH
