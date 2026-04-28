@@ -97,7 +97,7 @@ let temparature: number[] = [100, 90, 80];
 let colors: string[] = ["red", "yellow", "green"];
 //colors.push(180); // this will result in typeError
 
-let user: (string | number)[] = ["John", "peter", 100, 90];
+// let user: (string | number)[] = ["John", "peter", 100, 90];
 // user.push(true); // this array will take only string and number data type values not boolean which will result in typeError
 
 // 5. objects in typescript
@@ -252,3 +252,111 @@ function processData(
 console.log(processData(10)); // Output: 100
 console.log(processData("Hello")); // Output: HELLO
 console.log(processData("Hello", { reverse: true })); // Output: OLLEH
+
+// Type Alias - A type alias lets you create a custom name for any type.
+
+// type User = { id: number; name: string; isActive: boolean };
+
+// const john: User = {
+//   id: 1,
+//   name: "John",
+//   isActive: true,
+// };
+
+// console.log(john);
+
+// 1 - Union Types
+
+type Status = "success" | "error" | "loading";
+
+const status: Status = "loading";
+
+type Employee = {
+  id: number;
+  name: string;
+  department: string;
+};
+
+type Manager = {
+  id: number;
+  name: string;
+  employees: Employee[];
+};
+
+type Staff = Employee | Manager;
+
+const peter: Employee = { id: 1, name: "peter", department: "sales" };
+const John: Employee = { id: 2, name: "peter", department: "sales" };
+
+const julie: Manager = { id: 3, name: "Julie", employees: [peter, John] };
+
+function printStaffDetails(staff: Staff) {
+  if ("employees" in staff) {
+    console.log(
+      `${staff.name} is a manager of ${staff.employees.length} employees.`,
+    );
+  } else {
+    console.log(
+      `${staff.name} is an employee in the ${staff.department} department.`,
+    );
+  }
+}
+
+console.log(printStaffDetails(julie));
+
+// Intersection Type - In TypeScript, intersection types combine multiple types into a single type.
+
+type Book = { id: number; name: string; price: number };
+
+type DiscountedBook = Book & { discount: number };
+
+const book1: Book = { id: 1, name: "Atomic Habits", price: 10 };
+
+const book2: DiscountedBook = {
+  id: 1,
+  name: "Hooked",
+  price: 20,
+  discount: 0.1,
+};
+
+// computed properties - Computed properties in JavaScript are a feature that allows you to dynamically create property keys on objects. This is done by wrapping an expression in square brackets [] that computes the property name when creating an object.
+
+const propName = "age";
+
+type Animal = { name: string; [propName]: number };
+
+const tiger: Animal = { name: "tiger", [propName]: 10 };
+
+// Interface - An interface is mainly used to define the structure of objects. It is like blueprint for objects.
+
+interface User {
+  readonly name: string; // we can also add readonly on properties
+  age?: number; // optional properties also can also be defined
+  printName(): void;
+  greetFunc(message: string): string;
+  printSomething: (val: number) => number;
+}
+
+const user: User = {
+  name: "nanda",
+  age: 25,
+  printName() {
+    console.log(this.name);
+  },
+  greetFunc(message) {
+    return `Hello ${this.name} ${message}`;
+  },
+  // printSomething: function (val) {
+  //   return val;
+  // },
+  // printSomething: (val) => val,
+  printSomething(val) {
+    return val;
+  },
+};
+
+user.printName();
+
+console.log(user.greetFunc("Have an nice day"));
+
+console.log(user.printSomething(10));
