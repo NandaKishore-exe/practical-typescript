@@ -127,7 +127,7 @@ let items2: { readonly title: string; cost?: number }[] = [book, pen, notebook];
 let bike: { brand: string; year: number } = { brand: "KTM", year: 2023 };
 // bike.year = "2023" // Type 'string' is not assignable to type 'number'.
 
-let laptop: { brand: string; year: number } = { brand: "asus", year: 2022 };
+// let laptop: { brand: string; year: number } = { brand: "asus", year: 2022 };
 
 let user2: { name: string; age: number }[] = [
   { name: "john", age: 20 },
@@ -360,3 +360,75 @@ user.printName();
 console.log(user.greetFunc("Have an nice day"));
 
 console.log(user.printSomething(10));
+
+// challenge 1
+
+interface Computer {
+  readonly id: number;
+  brand: string;
+  ram: number;
+  storage?: number;
+  upgradeRAM(increase: number): number;
+}
+
+const laptop: Computer = {
+  id: 1,
+  brand: "HP",
+  ram: 8,
+  upgradeRAM(amount) {
+    this.ram += amount;
+    return this.ram;
+  },
+};
+
+laptop.storage = 512;
+
+console.log(laptop.upgradeRAM(4));
+
+console.log(laptop);
+
+// Interface merging
+
+interface Person {
+  name: string;
+  getDetails(): string;
+}
+
+interface DogOwner {
+  dogName: string;
+  getDogDetails(): string;
+}
+
+// Merging (reopening) an interface in TypeScript is a process where you declare an interface with the same name more than once, and TypeScript will merge their members.
+
+// Merging the interface
+interface Person {
+  age: number;
+}
+
+const person1: Person = {
+  name: "john",
+  age: 20,
+  getDetails() {
+    return `Name: ${this.name}, Age: ${this.age}`;
+  },
+};
+
+console.log(person1.getDetails());
+
+// Extending an interface in TypeScript is a way to create a new interface that inherits the properties and methods of an existing interface. You use the extends keyword to do this. When you extend an interface, the new interface will have all the members of the base interface, plus any new members that you add.
+
+// Extending the interface
+
+interface Worker extends Person {
+  workId: number;
+}
+
+const employee: Worker = {
+  name: "jane",
+  age: 28,
+  workId: 123,
+  getDetails() {
+    return `Name: ${this.name}, Age: ${this.age}, workId: ${this.workId}`;
+  },
+};
